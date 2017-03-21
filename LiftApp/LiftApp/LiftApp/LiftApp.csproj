@@ -45,6 +45,8 @@
     <Compile Include="Models\ModelExercise.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Models\SetPart.cs" />
+    <Compile Include="Models\Workout.cs" />
+    <Compile Include="Models\WorkOutType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
