@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiftApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,14 @@ namespace LiftApp
     {
         public MainPage()
         {
+            ViewModel = new MainPageViewModel(new PageService());
             InitializeComponent();
         }
+        public MainPageViewModel ViewModel
+        {
+            get { return BindingContext as MainPageViewModel; }
+            set { BindingContext = value; }
+        }
+
     }
 }

@@ -13,7 +13,7 @@ namespace LiftApp
         {
             InitializeComponent();
 
-            MainPage = new LiftApp.MainPage();
+            MainPage = new NavigationPage(new LiftApp.MainPage());
         }
 
         protected override void OnStart()
