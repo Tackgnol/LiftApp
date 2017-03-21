@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace LiftApp.Models
 {
-    public class WorkTime
+    class Exercise
     {
         public int Id { get; set; }
-        public TimeSpan Time { get; set; }
+        public virtual ModelExercise Excercise { get; set; }
+        public virtual ICollection<Set> Sets { get; set; }
     }
 }

@@ -41,12 +41,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\ISetElement.cs" />
+    <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\ModelExercise.cs" />
-    <Compile Include="Models\Rep.cs" />
-    <Compile Include="Models\RepElement.cs" />
-    <Compile Include="Models\TimeElement.cs" />
-    <Compile Include="Models\WorkTime.cs" />
+    <Compile Include="Models\Set.cs" />
+    <Compile Include="Models\SetPart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

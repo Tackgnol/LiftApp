@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace LiftApp.Models
 {
-    public class RepElement : Element<Rep>
+    class Set
     {
-        public Rep r;
-
-        public override Rep GetContent()
-        {
-            return r;
-        }
+        public int Id { get; set; }
+        public int Target { get; set; }
+        public virtual ICollection<SetPart> Parts { get; set; }
     }
 }

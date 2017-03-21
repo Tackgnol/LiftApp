@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace LiftApp.Models
 {
-    public class Rep
+    class SetPart
     {
         public int Id { get; set; }
+        public int Count { get; set; }
+        public string Unit { get; set; }
         public double Weight { get; set; }
     }
 }
