@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiftApp.Models
 {
-    class Exercise
+    public class Exercise
     {
         public int Id { get; set; }
         public virtual ModelExercise Excercise { get; set; }

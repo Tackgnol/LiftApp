@@ -18,5 +18,6 @@ namespace LiftApp.ViewModels
         {
            await Application.Current.MainPage.Navigation.PushAsync(page);
         }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiftApp.Models
 {
-    class WorkOutType
+    public class WorkOutType
     {
         public int Id { get; set; }
         public string Name { get; set; }

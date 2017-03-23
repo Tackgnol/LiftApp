@@ -4,8 +4,8 @@
              xmlns:local="clr-namespace:LiftApp"
              BackgroundImage="bgManly.jpeg"
              x:Class="LiftApp.MainPage">
-    <StackLayout VerticalOptions="Center" 
-           HorizontalOptions="Center" >
+    <StackLayout VerticalOptions="CenterAndExpand" 
+           HorizontalOptions="CenterAndExpand">
         <Label Text="Welcome to the LyftApp!" Font="Arial" FontSize="75"  FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="White"/>
         <Button Text="Start a workout!" BackgroundColor="White" Command="{Binding GoToWorkoutsCommand}"/>
         <Button Text="Plan Your workouts!" BackgroundColor="White"/>

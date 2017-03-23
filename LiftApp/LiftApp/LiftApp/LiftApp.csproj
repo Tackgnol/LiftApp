@@ -48,10 +48,12 @@
     <Compile Include="Models\Workout.cs" />
     <Compile Include="Models\WorkOutType.cs" />
     <Compile Include="Persistence\ISQLiteDb.cs" />
+    <Compile Include="Persistence\SQLiteWorkoutStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ExerciseViewModel.cs" />
     <Compile Include="ViewModels\IPageService.cs" />
+    <Compile Include="ViewModels\IWorkoutStore.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\PageService.cs" />
     <Compile Include="ViewModels\WorkoutsOverviewViewModel.cs" />

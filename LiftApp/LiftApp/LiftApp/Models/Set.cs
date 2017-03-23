@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LiftApp.Models
 {
-    class Set
+    public class Set
     {
         public int Id { get; set; }
         public int Target { get; set; }
