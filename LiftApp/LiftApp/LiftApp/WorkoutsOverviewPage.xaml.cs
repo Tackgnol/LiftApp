@@ -27,9 +27,7 @@ namespace LiftApp
         }
         protected override void OnAppearing()
         {
-            ViewModel.AddWorkoutCommand.Execute(null);
             ViewModel.LoadDataCommand.Execute(null);
-
             base.OnAppearing();
         }
         public WorkoutsOverviewViewModel ViewModel

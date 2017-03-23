@@ -27,7 +27,7 @@ namespace LiftApp.ViewModels
             _pageService = pageService;
             _workoutStore = workoutStore;
             LoadDataCommand = new Command(async () => await LoadData());
-            AddWorkoutCommand = new Command(AddWorkout);
+            //AddWorkoutCommand = new Command(AddWorkout);
         }
         public Workout selectedWorkout
         {
@@ -46,20 +46,12 @@ namespace LiftApp.ViewModels
             {
                 Workouts.Add(c);
             }
+            
 
         }
         private void AddWorkout()
         {
-            var workout = new Workout
-            {
-                Name = "A",
-                Description = "B",
-                Id = 1,
-                Date = DateTime.Now,
-                IsTemplate = false
-            };
 
-            _workoutStore.AddWorkout(workout);
         }
     }
 }

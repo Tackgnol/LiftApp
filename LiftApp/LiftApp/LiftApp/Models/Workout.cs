@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,13 @@ namespace LiftApp.Models
         public bool IsTemplate { get; set; }
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        [ForeignKey(typeof(WorkOutType))]
+        public int TypeId { get; set; }
         public DateTime Date { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Comments { get; set; }
         public string ImageDirectory { get; set; }
-        //public virtual WorkOutType Type { get; set; }
         //public virtual ICollection<Exercise> Exercises { get; set; }
     }
 }

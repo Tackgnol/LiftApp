@@ -11,6 +11,8 @@ namespace LiftApp.ViewModels
     {
         Task<IEnumerable<Workout>> GetWorkoutsAsync();
         Task<Workout> GetWorkout(int id);
+        Task<WorkOutType> GetWorkoutType(int typeId);
+        Task<IEnumerable<Exercise>> GetRelatedExercises(int workoutId);
         Task AddWorkout(Workout workout);
         Task UpdateWorkout(Workout workout);
         Task DeleteWorkout(Workout workout);
