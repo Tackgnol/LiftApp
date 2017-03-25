@@ -21,13 +21,17 @@ namespace LiftApp.ViewModels
 
         public ICommand LoadDataCommand { get; private set; }
         public ICommand AddWorkoutCommand { get; private set; }
+        public ICommand DeleteWorkoutCommand { get; private set; }
+        public ICommand SelectWorkoutCommand { get; private set; }
 
         public WorkoutsOverviewViewModel(IWorkoutStore workoutStore ,IPageService pageService)
         {
             _pageService = pageService;
             _workoutStore = workoutStore;
             LoadDataCommand = new Command(async () => await LoadData());
-            //AddWorkoutCommand = new Command(AddWorkout);
+            AddWorkoutCommand = new Command(async () => await AddWorkout());
+            DeleteWorkoutCommand = new Command(async () => await DeleteWorkout());
+            SelectWorkoutCommand = new Command<Workout>(w=>SelectWorkout(w));
         }
         public Workout selectedWorkout
         {
@@ -40,8 +44,12 @@ namespace LiftApp.ViewModels
             {
                 return;
             }
+            Workouts.Clear();
             _isDataLoaded = true;
             var workouts = await _workoutStore.GetWorkoutsAsync();
+            {
+
+            }
             foreach (var c in workouts)
             {
                 Workouts.Add(c);
@@ -49,8 +57,27 @@ namespace LiftApp.ViewModels
             
 
         }
-        private void AddWorkout()
+        private async Task AddWorkout()
         {
+            await _pageService.PushAsync(new WorkoutDetailsPage());
+            _isDataLoaded = false;
+        }
+        private void SelectWorkout(Workout workout)
+        {
+            _selectedWorkout = workout;
+        }
+        private async Task DeleteWorkout()
+        {
+            if (_selectedWorkout == null)
+            {
+                return;
+            }
+            if (await _pageService.DisplayAlert("Delete workout", "You are about to permamently delete a workout!", "Delete", "Cancel"))
+            {
+                await _workoutStore.DeleteWorkout(_selectedWorkout);
+                Workouts.Remove(_selectedWorkout);
+                _selectedWorkout = null;
+            }
 
         }
     }

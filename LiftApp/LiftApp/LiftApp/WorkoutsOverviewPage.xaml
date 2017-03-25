@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LiftApp.WorkoutsOverview">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add"/>
+        <ToolbarItem Text="Add" Command="{Binding AddWorkoutCommand}"/>
+        <ToolbarItem Text="Delete" Command="{Binding DeleteWorkoutCommand}"/>
     </ContentPage.ToolbarItems>
     <ListView
-        ItemsSource="{Binding Workouts}">
+        ItemsSource="{Binding Workouts}"
+        ItemSelected="ListView_ItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell

@@ -23,6 +23,7 @@ namespace LiftApp
             var workoutStore = new SQLiteWorkoutStore(DependencyService.Get<ISQLiteDb>());
             var pageService = new PageService();
             ViewModel = new WorkoutsOverviewViewModel(workoutStore, pageService);
+
             InitializeComponent();
         }
         protected override void OnAppearing()
@@ -36,6 +37,9 @@ namespace LiftApp
             set { BindingContext = value; }
         }
 
-
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ViewModel.SelectWorkoutCommand.Execute(e.SelectedItem);
+        }
     }
 }

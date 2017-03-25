@@ -17,6 +17,8 @@ namespace LiftApp.Persistence
         {
             _connection = db.GetConnection();
             _connection.CreateTableAsync<Workout>();
+            _connection.CreateTableAsync<WorkOutType>();
+            _connection.CreateTableAsync<Exercise>();
         }
 
         public async Task AddWorkout(Workout workout)

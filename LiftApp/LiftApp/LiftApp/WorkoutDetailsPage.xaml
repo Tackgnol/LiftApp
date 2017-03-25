@@ -2,4 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LiftApp.WorkoutDetailsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveWorkoutCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+    <TableView Intent="Form">
+        <TableRoot>
+            <TableSection Title="Info">
+                <EntryCell Label="Name" Text="{Binding Name}"/>
+                <EntryCell Label="Description" Text="{Binding Description}"/>
+                <ViewCell>
+                    <DatePicker Date="{Binding Date}"/>
+                </ViewCell>
+            </TableSection>
+            <TableSection Title="Exercises">
+                <ViewCell>
+                    <Button Text="New Exercise" Command="{Binding AddExerciseCommand}"/>                
+                </ViewCell>
+                <ViewCell>
+                    <ListView ItemsSource="{Binding Exercises}"/>
+                </ViewCell>
+            </TableSection>
+        </TableRoot>
+    </TableView>
 </ContentPage>

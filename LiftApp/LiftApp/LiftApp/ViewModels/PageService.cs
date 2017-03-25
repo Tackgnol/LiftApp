@@ -14,9 +14,20 @@ namespace LiftApp.ViewModels
             return await Application.Current.MainPage.DisplayAlert(title, message, ok, cancel);
         }
 
+        public async Task NavigationPushAsync(Page page)
+        {
+
+            await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(page));
+        }
+
         public async Task PushAsync(Page page)
         {
            await Application.Current.MainPage.Navigation.PushAsync(page);
+        }
+
+        public async Task PopAsync()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
 
     }

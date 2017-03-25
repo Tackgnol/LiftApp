@@ -10,7 +10,11 @@ namespace LiftApp.ViewModels
     public interface IPageService
     {
         Task PushAsync(Page page);
+        Task PopAsync();
+        Task NavigationPushAsync(Page page);
         Task<bool> DisplayAlert(string title, string message, string ok, string cancel);
+        
+
         
     }
 }
