@@ -10,6 +10,6 @@ namespace LiftApp.Models
     {
         public int Id { get; set; }
         public int Target { get; set; }
-        public virtual ICollection<SetPart> Parts { get; set; }
+        public int ExerciseId { get; set; }
     }
 }

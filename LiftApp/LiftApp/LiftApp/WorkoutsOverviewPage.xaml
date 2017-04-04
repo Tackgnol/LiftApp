@@ -4,6 +4,7 @@
              x:Class="LiftApp.WorkoutsOverview">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddWorkoutCommand}"/>
+        <ToolbarItem Text="Edit" Command="{Binding EditWorkoutCommand}"/>
         <ToolbarItem Text="Delete" Command="{Binding DeleteWorkoutCommand}"/>
     </ContentPage.ToolbarItems>
     <ListView

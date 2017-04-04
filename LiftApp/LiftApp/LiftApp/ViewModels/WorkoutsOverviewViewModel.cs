@@ -23,6 +23,7 @@ namespace LiftApp.ViewModels
         public ICommand AddWorkoutCommand { get; private set; }
         public ICommand DeleteWorkoutCommand { get; private set; }
         public ICommand SelectWorkoutCommand { get; private set; }
+        public ICommand EditWorkoutCommand { get; private set; }
 
         public WorkoutsOverviewViewModel(IWorkoutStore workoutStore ,IPageService pageService)
         {
@@ -30,6 +31,7 @@ namespace LiftApp.ViewModels
             _workoutStore = workoutStore;
             LoadDataCommand = new Command(async () => await LoadData());
             AddWorkoutCommand = new Command(async () => await AddWorkout());
+            EditWorkoutCommand = new Command(async () => await EditWorkout());
             DeleteWorkoutCommand = new Command(async () => await DeleteWorkout());
             SelectWorkoutCommand = new Command<Workout>(w=>SelectWorkout(w));
         }
@@ -79,6 +81,16 @@ namespace LiftApp.ViewModels
                 _selectedWorkout = null;
             }
 
+        }
+        private async Task EditWorkout()
+        {
+            if (_selectedWorkout == null)
+            {
+                return;
+            }
+            await _pageService.PushAsync(new WorkoutDetailsPage(_selectedWorkout));
+            _isDataLoaded = false;
+            _selectedWorkout = null;
         }
     }
 }

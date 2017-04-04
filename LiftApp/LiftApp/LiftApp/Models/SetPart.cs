@@ -12,5 +12,6 @@ namespace LiftApp.Models
         public int Count { get; set; }
         public string Unit { get; set; }
         public double Weight { get; set; }
+        public int SetId { get; set; }
     }
 }

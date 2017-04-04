@@ -63,10 +63,19 @@ namespace LiftApp.ViewModels
         private async Task SaveWorkout()
         {
             var workoutToAdd = new Workout();
+            workoutToAdd.Id = Id;
             workoutToAdd.Name = Name;
             workoutToAdd.Description = Description;
             workoutToAdd.Date = Date;
-            await _workoutStore.AddWorkout(workoutToAdd);
+            if (workoutToAdd.Id == 0)
+            {
+                await _workoutStore.AddWorkout(workoutToAdd);
+            }
+            else
+            {
+                await _workoutStore.UpdateWorkout(workoutToAdd);
+            }
+
             await _pageService.PopAsync();            
         }
 
