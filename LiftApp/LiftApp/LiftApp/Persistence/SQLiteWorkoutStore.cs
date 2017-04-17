@@ -19,11 +19,16 @@ namespace LiftApp.Persistence
             _connection.CreateTableAsync<Workout>();
             _connection.CreateTableAsync<WorkOutType>();
             _connection.CreateTableAsync<Exercise>();
+            _connection.CreateTableAsync<ModelExercise>();
         }
 
         public async Task AddWorkout(Workout workout)
         {
             await _connection.InsertAsync(workout);
+        }
+        public async Task AddModelExercise(ModelExercise modelExercise)
+        {
+            await _connection.InsertAsync(modelExercise);
         }
 
         public async Task DeleteWorkout(Workout workout)
@@ -61,6 +66,13 @@ namespace LiftApp.Persistence
            await _connection.UpdateAsync(workout);
         }
 
-
+        public async Task FillExercisesFromDataStore(AbstractSourceFactory factory)
+        {
+            List<ModelExercise> exercises = await factory.ExercisesGet();
+            foreach (var exercise in exercises)
+            {
+                await _connection.InsertAllAsync(exercises);
+            }
+        }
     }
 }

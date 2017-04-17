@@ -58,6 +58,13 @@ namespace LiftApp.Persistence
            await _connection.UpdateAsync(workout);
         }
 
-
+        public async Task FillExercisesFromDataStore(AbstractSourceFactory factory)
+        {
+            List<ModelExercise> exercises = await factory.ExercisesGet();
+            foreach (var exercise in exercises)
+            {
+                await _connection.InsertAllAsync(exercises);
+            }
+        }
     }
 }

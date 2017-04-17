@@ -1,4 +1,5 @@
 ﻿using LiftApp.Models;
+using LiftApp.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace LiftApp.ViewModels
         Task AddWorkout(Workout workout);
         Task UpdateWorkout(Workout workout);
         Task DeleteWorkout(Workout workout);
+        Task FillExercisesFromDataStore(AbstractSourceFactory factory);
     }
 }
