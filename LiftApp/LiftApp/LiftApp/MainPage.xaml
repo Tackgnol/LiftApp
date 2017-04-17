@@ -9,7 +9,7 @@
            HorizontalOptions="CenterAndExpand">
         <Label Text="Welcome to the LiftApp!" Font="Arial" FontSize="75"  FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="White"/>
         <Button Text="Start a workout!" BackgroundColor="White" Command="{Binding GoToWorkoutsCommand}"/>
-        <Button Text="Plan Your workouts!" BackgroundColor="White"/>
+        <Button Text="Plan Your workouts!" BackgroundColor="White" Command="{Binding GoToModelExercisesCommand}"/>
         <Button Text="View Statistics" BackgroundColor="White"/>
     </StackLayout>
 </ContentPage>

@@ -66,5 +66,15 @@ namespace LiftApp.Persistence
                 await _connection.InsertAllAsync(exercises);
             }
         }
+
+        public async Task<IEnumerable<ModelExercise>> GetModelExercisesAsync()
+        {
+            return await _connection.Table<ModelExercise>().ToListAsync();
+        }
+
+        public async Task DropModelExercises()
+        {
+            await _connection.DropTableAsync<ModelExercise>();
+        }
     }
 }

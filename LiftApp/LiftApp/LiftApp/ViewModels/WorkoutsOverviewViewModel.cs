@@ -49,12 +49,9 @@ namespace LiftApp.ViewModels
             Workouts.Clear();
             _isDataLoaded = true;
             var workouts = await _workoutStore.GetWorkoutsAsync();
+            foreach (var w in workouts)
             {
-
-            }
-            foreach (var c in workouts)
-            {
-                Workouts.Add(c);
+                Workouts.Add(w);
             }
             
 

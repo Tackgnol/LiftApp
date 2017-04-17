@@ -37,7 +37,7 @@ namespace LiftApp.Persistence
             public List<int> equipment { get; set; }
 
         }
-        private string _URL = "https://wger.de/api/v2/exercise/?format=api&language=2";
+        private string _URL = "https://wger.de/api/v2/exercise/?format=json&language=2";
         private List<ModelExercise> _exercises = new List<ModelExercise>();
         private HttpClient _client = new HttpClient();
         public async override Task<List<ModelExercise>> ExercisesGet()
@@ -46,7 +46,7 @@ namespace LiftApp.Persistence
             next = await ParseJSON();
             while (next != null)
             {
-               await ParseJSON(next);
+              next = await ParseJSON(next);
             }
             return _exercises;
         }
@@ -56,7 +56,7 @@ namespace LiftApp.Persistence
             {
                 url = _URL;
             }
-            var content = await _client.GetStringAsync(_URL);
+            var content = await _client.GetStringAsync(url);
             var response = JsonConvert.DeserializeObject<_response>(content);
             var exercises = response.results;
             foreach (var exercise in exercises)

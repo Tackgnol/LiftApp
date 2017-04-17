@@ -38,6 +38,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreateWorkoutAllExercises.xaml.cs">
+      <DependentUpon>CreateWorkoutAllExercises.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExercisesOverwievPage.xaml.cs">
       <DependentUpon>ExercisesOverwievPage.xaml</DependentUpon>
     </Compile>
@@ -61,6 +64,7 @@
     <Compile Include="ViewModels\IPageService.cs" />
     <Compile Include="ViewModels\IWorkoutStore.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\ModelExercisesViewModel.cs" />
     <Compile Include="ViewModels\PageService.cs" />
     <Compile Include="ViewModels\WorkoutsOverviewViewModel.cs" />
     <Compile Include="ViewModels\WorkoutViewModel.cs" />
@@ -155,6 +159,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ExercisesOverwievPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CreateWorkoutAllExercises.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -18,5 +18,7 @@ namespace LiftApp.ViewModels
         Task UpdateWorkout(Workout workout);
         Task DeleteWorkout(Workout workout);
         Task FillExercisesFromDataStore(AbstractSourceFactory factory);
+        Task<IEnumerable<ModelExercise>> GetModelExercisesAsync();
+        Task DropModelExercises();
     }
 }

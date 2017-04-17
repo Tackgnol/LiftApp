@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LiftApp.CreateWorkoutAllExercises">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Load From API" Command="{Binding RefreshDatabaseCommand}"/>
+        <ToolbarItem Text="Drop all model exercises" Command="{Binding DropModelExercisesCommand}"/>
+        
+    </ContentPage.ToolbarItems>
+    <ListView
+        ItemsSource="{Binding ModelExercises}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell
+                    Text="{Binding Name}"
+                    Detail="{Binding Description}"
+                    />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
+</ContentPage>

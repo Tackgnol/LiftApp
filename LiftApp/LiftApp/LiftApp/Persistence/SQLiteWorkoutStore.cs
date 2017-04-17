@@ -56,6 +56,11 @@ namespace LiftApp.Persistence
             return await _connection.Table<Workout>().ToListAsync();
         }
 
+        public async Task<IEnumerable<ModelExercise>> GetModelExercisesAsync()
+        {
+            return await _connection.Table<ModelExercise>().ToListAsync();
+        }
+
         public async Task<WorkOutType> GetWorkoutType(int typeId)
         {
             return await _connection.FindAsync<WorkOutType>(typeId);
@@ -69,10 +74,12 @@ namespace LiftApp.Persistence
         public async Task FillExercisesFromDataStore(AbstractSourceFactory factory)
         {
             List<ModelExercise> exercises = await factory.ExercisesGet();
-            foreach (var exercise in exercises)
-            {
-                await _connection.InsertAllAsync(exercises);
-            }
+            await _connection.InsertAllAsync(exercises);
+        }
+
+        public async Task DropModelExercises()
+        {
+            await _connection.DropTableAsync<ModelExercise>();
         }
     }
 }
