@@ -49,12 +49,13 @@
     </Compile>
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\ModelExercise.cs" />
+    <Compile Include="Models\Muscle.cs" />
+    <Compile Include="Models\MuscleExerciseAssosiation.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Models\SetPart.cs" />
     <Compile Include="Models\Workout.cs" />
     <Compile Include="Models\WorkOutType.cs" />
     <Compile Include="Persistence\AbstractSourceFactory.cs" />
-    <Compile Include="Persistence\IExercisesSource.cs" />
     <Compile Include="Persistence\ISQLiteDb.cs" />
     <Compile Include="Persistence\SQLiteWorkoutStore.cs" />
     <Compile Include="Persistence\wgerSourceFactory.cs" />

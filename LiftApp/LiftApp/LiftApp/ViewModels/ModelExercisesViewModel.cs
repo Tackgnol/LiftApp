@@ -37,7 +37,9 @@ namespace LiftApp.ViewModels
                 return;
             ModelExercises.Clear();
             _isDataLoaded = true;
+
             var modelExercises = await _workoutStore.GetModelExercisesAsync();
+            
             foreach (var modelExercise in modelExercises)
             {
                 ModelExercises.Add(modelExercise);
@@ -48,7 +50,7 @@ namespace LiftApp.ViewModels
         private async Task RefreshDatabase()
         {
             AbstractSourceFactory factory = new wgerSourceFactory();
-            await _workoutStore.FillExercisesFromDataStore(factory);
+            await _workoutStore.BuildMuscleDatabase(factory);
             _isDataLoaded = false;
             await LoadData();
         }
@@ -56,11 +58,9 @@ namespace LiftApp.ViewModels
         private async Task DropModelExercises()
         {
             await _workoutStore.DropModelExercises();
+            _isDataLoaded = false;
+            await LoadData();
         }
 
-        private async Task GetDataFromAPI(AbstractSourceFactory factory)
-        {
-            await factory.ExercisesGet();
-        }
     }
 }

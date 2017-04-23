@@ -10,5 +10,7 @@ namespace LiftApp.Persistence
     public abstract class AbstractSourceFactory
     {
         public abstract Task<List<ModelExercise>> ExercisesGet();
+        public abstract Task<List<Muscle>> MuscleGet();
+        public abstract List<MuscleExerciseAssosiation> AssosiationGet();
     }
 }

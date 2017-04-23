@@ -20,6 +20,8 @@ namespace LiftApp.Persistence
             _connection.CreateTableAsync<WorkOutType>();
             _connection.CreateTableAsync<Exercise>();
             _connection.CreateTableAsync<ModelExercise>();
+            _connection.CreateTableAsync<Muscle>();
+            _connection.CreateTableAsync<MuscleExerciseAssosiation>();
         }
 
         public async Task AddWorkout(Workout workout)
@@ -71,15 +73,40 @@ namespace LiftApp.Persistence
            await _connection.UpdateAsync(workout);
         }
 
-        public async Task FillExercisesFromDataStore(AbstractSourceFactory factory)
+        public async Task BuildMuscleDatabase(AbstractSourceFactory factory)
         {
-            List<ModelExercise> exercises = await factory.ExercisesGet();
-            await _connection.InsertAllAsync(exercises);
+            await FillMuscleExerciseAssosiations(factory);
+            await FillExercisesFromDataStore(factory);
+            await FillMuscleExerciseAssosiations(factory);
+        }
+
+        public async Task<IEnumerable<Muscle>> GetMusclesAsync()
+        {
+            return await _connection.Table<Muscle>().ToListAsync();
         }
 
         public async Task DropModelExercises()
         {
             await _connection.DropTableAsync<ModelExercise>();
+            await _connection.DropTableAsync<Muscle>();
+            await _connection.DropTableAsync<MuscleExerciseAssosiation>();
+        }
+
+        private async Task FillExercisesFromDataStore(AbstractSourceFactory factory)
+        {
+            List<ModelExercise> exercises = await factory.ExercisesGet();
+            await _connection.InsertAllAsync(exercises);
+        }
+
+        private async Task FillMusclesFromDataStore(AbstractSourceFactory factory)
+        {
+            List<Muscle> muscles = await factory.MuscleGet();
+            await _connection.InsertAllAsync(muscles);
+        }
+        private async Task FillMuscleExerciseAssosiations(AbstractSourceFactory factory)
+        {
+            List<MuscleExerciseAssosiation> assosiations =  factory.AssosiationGet();
+            await _connection.InsertAllAsync(assosiations);
         }
     }
 }

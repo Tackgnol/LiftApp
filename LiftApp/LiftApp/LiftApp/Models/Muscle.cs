@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace LiftApp.Models
 {
-    public class ModelExercise 
-    {
+    public class Muscle
+    { 
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string Image { get; set; }
-        public bool UserGenerated { get; set; }
     }
 }
