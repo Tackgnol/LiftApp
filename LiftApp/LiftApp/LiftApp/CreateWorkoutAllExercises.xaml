@@ -7,16 +7,26 @@
         <ToolbarItem Text="Drop all model exercises" Command="{Binding DropModelExercisesCommand}"/>
         
     </ContentPage.ToolbarItems>
-    <ListView
-        ItemsSource="{Binding ModelExercises}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell
-                    Text="{Binding Name}"
-                    Detail="{Binding Description}"
-                    />
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-    
+    <StackLayout>
+        <Picker Title="Select a Muscle">
+            <Picker.Items>
+                <x:String>One</x:String>
+                <x:String>Two</x:String>
+            </Picker.Items>
+        </Picker>
+        <ListView
+            ItemsSource="{Binding GroupedExercises}"
+            IsGroupingEnabled="True"
+            GroupDisplayBinding="{Binding Title}"
+            GroupShortNameBinding="{Binding shortTitle}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell
+                        Text="{Binding Name}"
+                        Detail="{Binding Description}"
+                        />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

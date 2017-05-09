@@ -14,6 +14,7 @@ namespace LiftApp.ViewModels
         Task<Workout> GetWorkout(int id);
         Task<WorkOutType> GetWorkoutType(int typeId);
         Task<IEnumerable<Exercise>> GetRelatedExercises(int workoutId);
+        Task<List<Muscle>> GetMusclesForModelExercise(int exerciseId, string muscleType);
         Task AddWorkout(Workout workout);
         Task UpdateWorkout(Workout workout);
         Task DeleteWorkout(Workout workout);

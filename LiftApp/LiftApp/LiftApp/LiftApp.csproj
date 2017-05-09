@@ -48,6 +48,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Exercise.cs" />
+    <Compile Include="Models\ExerciseGroup.cs" />
     <Compile Include="Models\ModelExercise.cs" />
     <Compile Include="Models\Muscle.cs" />
     <Compile Include="Models\MuscleExerciseAssosiation.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="ViewModels\IWorkoutStore.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ModelExercisesViewModel.cs" />
+    <Compile Include="ViewModels\ModelExerciseViewModel.cs" />
     <Compile Include="ViewModels\PageService.cs" />
     <Compile Include="ViewModels\WorkoutsOverviewViewModel.cs" />
     <Compile Include="ViewModels\WorkoutViewModel.cs" />

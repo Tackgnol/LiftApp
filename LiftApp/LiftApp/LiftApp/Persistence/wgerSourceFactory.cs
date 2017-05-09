@@ -48,7 +48,7 @@ namespace LiftApp.Persistence
         }
 
         private string _ExerciseURL = "https://wger.de/api/v2/exercise/?format=json&language=2";
-        private string _MuscleURL = "https://wger.de/api/v2/muscle/?format=json";
+        private string _MuscleURL = "https://wger.de/api/v2/muscle/?format=json&language=2";
         private string _next;
         private List<ModelExercise> _exercises = new List<ModelExercise>();
         private List<_wgerExercise> _wgerExercises = new List<_wgerExercise>();
@@ -58,8 +58,7 @@ namespace LiftApp.Persistence
 
         public async override Task<List<Muscle>> MuscleGet()
         {
-            var content = await _client.GetStringAsync(_MuscleURL);
-            var muscles = await ParseJSON<_wgerMuscle>();
+            var muscles = await ParseJSON<_wgerMuscle>(_MuscleURL);
             while (_next != null)
             {
                 muscles.AddRange(await ParseJSON<_wgerMuscle>(_next));
@@ -79,7 +78,7 @@ namespace LiftApp.Persistence
         public async override Task<List<ModelExercise>> ExercisesGet()
         {
 
-            var _wgerExercises = await ParseJSON<_wgerExercise>(_ExerciseURL);
+            _wgerExercises = await ParseJSON<_wgerExercise>(_ExerciseURL);
 
             while (_next != null)
             {
@@ -92,7 +91,7 @@ namespace LiftApp.Persistence
                     {
                         Id = exercise.id,
                         Name = exercise.name,
-                        Description = exercise.description,
+                        Description = StripTagsCharArray( exercise.description),
                         UserGenerated = false
                     }
                     );
@@ -148,7 +147,32 @@ namespace LiftApp.Persistence
             return results;
         }
 
-
+        public static string StripTagsCharArray(string source)
+        {
+            char[] array = new char[source.Length];
+            int arrayIndex = 0;
+            bool inside = false;
+            for (int i = 0; i < source.Length; i++)
+            {
+                char let = source[i];
+                if (let == '<')
+                {
+                    inside = true;
+                    continue;
+                }
+                if (let == '>')
+                {
+                    inside = false;
+                    continue;
+                }
+                if (!inside)
+                {
+                    array[arrayIndex] = let;
+                    arrayIndex++;
+                }
+            }
+            return new string(array, 0, arrayIndex);
+        }
 
     }
 

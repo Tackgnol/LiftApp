@@ -63,6 +63,19 @@ namespace LiftApp.Persistence
             return await _connection.Table<ModelExercise>().ToListAsync();
         }
 
+        public async Task<List<Muscle>> GetMusclesForModelExercise(int exerciseId, string muscleType)
+        {
+            var musclesForExercise = await _connection.Table<MuscleExerciseAssosiation>()
+                .Where(e => e.ModelExerciseId == exerciseId && e.MuslceType ==muscleType)
+                .ToListAsync();
+            List<Muscle> muscles = new List<Muscle>();
+            foreach (var muscle in musclesForExercise)
+            {
+                muscles.Add(await GetMuscle(muscle.MuscleId));
+            }
+            return muscles;
+        }
+
         public async Task<WorkOutType> GetWorkoutType(int typeId)
         {
             return await _connection.FindAsync<WorkOutType>(typeId);
@@ -75,7 +88,7 @@ namespace LiftApp.Persistence
 
         public async Task BuildMuscleDatabase(AbstractSourceFactory factory)
         {
-            await FillMuscleExerciseAssosiations(factory);
+            await FillMusclesFromDataStore(factory);
             await FillExercisesFromDataStore(factory);
             await FillMuscleExerciseAssosiations(factory);
         }
@@ -83,6 +96,10 @@ namespace LiftApp.Persistence
         public async Task<IEnumerable<Muscle>> GetMusclesAsync()
         {
             return await _connection.Table<Muscle>().ToListAsync();
+        }
+        public async Task<Muscle> GetMuscle(int id)
+        {
+            return await _connection.FindAsync<Muscle>(id);
         }
 
         public async Task DropModelExercises()
