@@ -5,28 +5,30 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Load From API" Command="{Binding RefreshDatabaseCommand}"/>
         <ToolbarItem Text="Drop all model exercises" Command="{Binding DropModelExercisesCommand}"/>
-        
+
     </ContentPage.ToolbarItems>
-    <StackLayout>
-        <Picker Title="Select a Muscle">
-            <Picker.Items>
-                <x:String>One</x:String>
-                <x:String>Two</x:String>
-            </Picker.Items>
-        </Picker>
-        <ListView
-            ItemsSource="{Binding GroupedExercises}"
-            IsGroupingEnabled="True"
-            GroupDisplayBinding="{Binding Title}"
-            GroupShortNameBinding="{Binding shortTitle}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell
+    
+    <ContentPage.Content>
+
+        <StackLayout>
+            <Picker ItemsSource="{Binding Muscles}" 
+                    ItemDisplayBinding="{Binding Name}" 
+                    SelectedItem="{Binding SelectedMuscle}"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+
+            <ListView
+            ItemsSource="{Binding ModelExercises}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell
                         Text="{Binding Name}"
                         Detail="{Binding Description}"
                         />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+
+</ContentPage.Content>
 </ContentPage>

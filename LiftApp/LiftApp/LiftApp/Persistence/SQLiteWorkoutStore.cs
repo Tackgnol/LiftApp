@@ -76,6 +76,23 @@ namespace LiftApp.Persistence
             return muscles;
         }
 
+        public async Task<IEnumerable<MuscleExerciseAssosiation>> GetMuscleExerciseAssosiations(string muscleType, int? muscleID = null)
+        {
+            List<MuscleExerciseAssosiation> assosiations = new List<MuscleExerciseAssosiation>();
+            if (muscleID == null)
+            {
+                assosiations = await _connection.Table<MuscleExerciseAssosiation>()
+                    .Where(e=>e.MuslceType == muscleType).ToListAsync();
+            }
+            else
+            {
+                assosiations = await _connection.Table<MuscleExerciseAssosiation>()
+                    .Where(e => e.MuscleId == muscleID && e.MuslceType == muscleType).ToListAsync();
+            }
+
+            return assosiations;
+        }
+
         public async Task<WorkOutType> GetWorkoutType(int typeId)
         {
             return await _connection.FindAsync<WorkOutType>(typeId);
@@ -125,5 +142,7 @@ namespace LiftApp.Persistence
             List<MuscleExerciseAssosiation> assosiations =  factory.AssosiationGet();
             await _connection.InsertAllAsync(assosiations);
         }
+
+
     }
 }

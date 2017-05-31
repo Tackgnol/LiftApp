@@ -13,30 +13,25 @@ namespace LiftApp.ViewModels
 {
     public class ModelExercisesViewModel : BaseViewModel
     {
-        public ObservableCollection< ModelExerciseViewModel> ModelExercises { get; private set; } = new ObservableCollection<ModelExerciseViewModel>();
-        public ObservableCollection<ExerciseGroup> GroupedExercises { get; private set; } = new ObservableCollection<ExerciseGroup>();
+        public ObservableCollection<ModelExercise> ModelExercises { get; private set; } = new ObservableCollection<ModelExercise>();
         public ObservableCollection<Muscle> Muscles { get; set; } = new ObservableCollection<Muscle>();
-        public string SelectedMuscle { get; set; } = null;
+        public Muscle SelectedMuscle { get; set; }
         private readonly IPageService _pageService;
         private IWorkoutStore _workoutStore;
         private bool _isDataLoaded;
-        
+        private List<ModelExerciseViewModel> _ModelExercises = new List<ModelExerciseViewModel>();
+
         public ICommand RefreshDatabaseCommand { get; private set; }
         public ICommand LoadDataCommand { get; private set; }
         public ICommand DropModelExercisesCommand { get; private set; }
+        public ICommand ReloadDataCommand { get; private set; }
         private IEqualityComparer<Muscle> _compareMuscle { get; set; } = new MuscleComparer();
 
         private class MuscleComparer : IEqualityComparer<Muscle>
         {
             public bool Equals(Muscle x, Muscle y)
             {
-                bool id=false;
-                bool name=false;
-                if (x.Id == y.Id)
-                    id = true;
-                if (x.Name == y.Name)
-                    name = true;
-                return id && name;
+                return GetHashCode(x) == GetHashCode(y);
             }
 
             public int GetHashCode(Muscle muscle)
@@ -52,6 +47,7 @@ namespace LiftApp.ViewModels
             _workoutStore = workoutStore;
             RefreshDatabaseCommand = new Command(async () => await RefreshDatabase());
             LoadDataCommand = new Command(async () => await LoadData());
+            ReloadDataCommand = new Command(async () => await ReloadData());
             DropModelExercisesCommand = new Command(async () => await DropModelExercises());
         }
 
@@ -64,43 +60,37 @@ namespace LiftApp.ViewModels
 
             var modelExercises = await _workoutStore.GetModelExercisesAsync();
 
-            foreach (var modelExercise in modelExercises)
-            {
-                ModelExercises.Add(await
-                    ModelExerciseViewModel.CreateAsync(modelExercise, _workoutStore)
-                );
 
-            }
-
-            var muscles = await _workoutStore.GetMusclesAsync();
-
-            foreach (var muscle in muscles)
-            {
-                Muscles.Add(muscle);
-            }
-
+            IEnumerable<Muscle> muscles = new List<Muscle>();
             if (SelectedMuscle != null)
             {
-                var selectedMuscle = from m in Muscles
-                                     where m.Name == SelectedMuscle
-                                     select m;
-                Muscles.Clear();
-                Muscles.Add(selectedMuscle.SingleOrDefault());
+                var assosiatedExercises = await _workoutStore.GetMuscleExerciseAssosiations("Primary", SelectedMuscle.Id);
+                foreach (var assosiation in assosiatedExercises)
+                {
+                    ModelExercises.Add(modelExercises.Where(e => e.Id == assosiation.ModelExerciseId).SingleOrDefault());
+                }
             }
-
-            
-
-            foreach (var muscle in Muscles)
+            else
             {
-                var currentMuscle = new ExerciseGroup(muscle.Name, muscle.Name);
-  
-                var foundMuscles = from e in ModelExercises
-                                   where e.PrimaryMuscles.Contains(muscle, _compareMuscle)
-                                   select e;
-                currentMuscle.AddRange(foundMuscles);
-                GroupedExercises.Add(currentMuscle);
+                muscles = await _workoutStore.GetMusclesAsync();
+
+                foreach (var muscle in muscles)
+                {
+                    Muscles.Add(muscle);
+                }
+                foreach (var exercise in modelExercises)
+                {
+                    ModelExercises.Add(exercise);
+                }
+
             }
 
+
+        }
+        private async Task ReloadData()
+        {
+            _isDataLoaded = false;
+            await LoadData();
         }
 
         private async Task RefreshDatabase()

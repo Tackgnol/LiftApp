@@ -33,5 +33,9 @@ namespace LiftApp
             get { return BindingContext as ModelExercisesViewModel; }
             set { BindingContext = value; }
         }
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ViewModel.ReloadDataCommand.Execute(null);
+        }
     }
 }

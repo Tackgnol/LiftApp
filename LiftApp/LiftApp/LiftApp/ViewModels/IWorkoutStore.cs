@@ -21,6 +21,7 @@ namespace LiftApp.ViewModels
         Task BuildMuscleDatabase(AbstractSourceFactory factory);
         Task<IEnumerable<ModelExercise>> GetModelExercisesAsync();
         Task<IEnumerable<Muscle>> GetMusclesAsync();
+        Task<IEnumerable<MuscleExerciseAssosiation>> GetMuscleExerciseAssosiations(string muscleType, int? muscleID);
         Task DropModelExercises();
     }
 }
