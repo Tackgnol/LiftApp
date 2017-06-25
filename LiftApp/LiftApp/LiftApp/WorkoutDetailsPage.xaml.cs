@@ -16,7 +16,7 @@ namespace LiftApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorkoutDetailsPage : ContentPage
     {
-        private Workout _workout;
+        public Workout _workout;
         public WorkoutDetailsPage()
         {
             _workout = new Workout();
@@ -32,7 +32,8 @@ namespace LiftApp
         {
             var workoutStore = new SQLiteWorkoutStore(DependencyService.Get<ISQLiteDb>());
             var pageService = new PageService();
-            ViewModel = await WorkoutViewModel.CreateAsync(_workout, workoutStore, pageService);
+            if(ViewModel == null)
+                ViewModel = await WorkoutViewModel.CreateAsync(_workout, workoutStore, pageService);
 
             base.OnAppearing();
         }

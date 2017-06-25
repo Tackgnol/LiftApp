@@ -13,9 +13,18 @@ namespace LiftApp.ViewModels
 {
     public class ModelExercisesViewModel : BaseViewModel
     {
+        public event EventHandler<Exercise> ExerciseAdded;
+
+
         public ObservableCollection<ModelExercise> ModelExercises { get; private set; } = new ObservableCollection<ModelExercise>();
         public ObservableCollection<Muscle> Muscles { get; set; } = new ObservableCollection<Muscle>();
         public Muscle SelectedMuscle { get; set; }
+        public ModelExercise SelectedExercise
+        {
+            get { return _selectedExercise; }
+            set { SetValue(ref _selectedExercise, value); }
+        }
+        private ModelExercise _selectedExercise = null;
         private readonly IPageService _pageService;
         private IWorkoutStore _workoutStore;
         private bool _isDataLoaded;
@@ -25,6 +34,7 @@ namespace LiftApp.ViewModels
         public ICommand LoadDataCommand { get; private set; }
         public ICommand DropModelExercisesCommand { get; private set; }
         public ICommand ReloadDataCommand { get; private set; }
+        public ICommand SelectExerciseCommand { get; private set; }
         private IEqualityComparer<Muscle> _compareMuscle { get; set; } = new MuscleComparer();
 
         private class MuscleComparer : IEqualityComparer<Muscle>
@@ -49,6 +59,7 @@ namespace LiftApp.ViewModels
             LoadDataCommand = new Command(async () => await LoadData());
             ReloadDataCommand = new Command(async () => await ReloadData());
             DropModelExercisesCommand = new Command(async () => await DropModelExercises());
+            SelectExerciseCommand = new Command<ModelExercise>(async (e) => await SelectExercise(e));
         }
 
         private async Task LoadData()
@@ -106,6 +117,12 @@ namespace LiftApp.ViewModels
             await _workoutStore.DropModelExercises();
             _isDataLoaded = false;
             await LoadData();
+        }
+
+        private async Task SelectExercise(ModelExercise exercise)
+        {
+            _selectedExercise = exercise;
+            await _pageService.PopAsync();
         }
 
     }

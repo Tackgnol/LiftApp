@@ -22,6 +22,11 @@ namespace LiftApp
             ViewModel = new ModelExercisesViewModel(workoutStore, pageService);
             InitializeComponent();
         }
+        public CreateWorkoutAllExercises(ModelExercisesViewModel viewModel)
+        {
+            InitializeComponent();
+            BindingContext = viewModel;
+        }
 
         protected override void OnAppearing()
         {
@@ -36,6 +41,11 @@ namespace LiftApp
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
             ViewModel.ReloadDataCommand.Execute(null);
+        }
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ViewModel.SelectExerciseCommand.Execute(e.SelectedItem);
         }
     }
 }

@@ -9,9 +9,8 @@ namespace LiftApp.Models
     public class SetPart
     {
         public int Id { get; set; }
-        public int Count { get; set; }
         public string Unit { get; set; }
-        public double Weight { get; set; }
+        public double Amount { get; set; }
         public int SetId { get; set; }
     }
 }

@@ -23,14 +23,14 @@ namespace LiftApp.ViewModels
 
         private async Task GoToWorkouts()
         {
-            var newWorkoutPage = new WorkoutsOverview();
-            await _pageService.PushAsync(newWorkoutPage);
+            var allWorkouts = new CreateWorkoutAllExercises();
+            await _pageService.PushAsync(allWorkouts);
         }
 
         private async Task GoToModelExercises()
         {
-            var newModelExercisesPage = new CreateWorkoutAllExercises();
-            await _pageService.PushAsync(newModelExercisesPage);
+            var newWorkoutPage = new WorkoutsOverview();
+            await _pageService.PushAsync(newWorkoutPage);
         }
 
     }

@@ -20,6 +20,5 @@ namespace LiftApp.Models
         public string Description { get; set; }
         public string Comments { get; set; }
         public string ImageDirectory { get; set; }
-        //public virtual ICollection<Exercise> Exercises { get; set; }
     }
 }

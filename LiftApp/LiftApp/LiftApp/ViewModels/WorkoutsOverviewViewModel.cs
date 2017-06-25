@@ -13,6 +13,8 @@ namespace LiftApp.ViewModels
 {
     public class WorkoutsOverviewViewModel : BaseViewModel
     {
+
+
         public ObservableCollection<Workout> Workouts { get; private set; } = new ObservableCollection<Workout>();
         private readonly IPageService _pageService;
         private Workout _selectedWorkout;

@@ -17,7 +17,8 @@
                     SelectedIndexChanged="Picker_SelectedIndexChanged"/>
 
             <ListView
-            ItemsSource="{Binding ModelExercises}">
+            ItemsSource="{Binding ModelExercises}"
+                ItemSelected="ListView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell

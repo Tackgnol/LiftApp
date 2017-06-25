@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LiftApp.AddExercise">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Select Model Exercise"/>
+            <Label Text="Model Exercise Name"/>
+            <Label Text="Model Exercise Description"/>
+            <Button Text="Add a Set"/>
+            <ListView
+                ItemsSource="{Binding Sets}"
+                ItemSelected="Set_Selected">
+                <DataTemplate>
+                    <TextCell
+                    Text="{Binding SetNo, StringFormat='Set No:{0:N}'}"
+                    Detail="{Binding Target, StringFormat='Expected Reps:{0:N}'}"
+                    />
+                </DataTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -46,10 +46,6 @@ namespace LiftApp.ViewModels
         {
             Type = await _workoutStore.GetWorkoutType(workout.TypeId);
             var exercises = await _workoutStore.GetRelatedExercises(Id);
-            foreach (var ex in exercises)
-            {
-                Exercises.Add(ex);
-            }
             return this;
         }
 
@@ -61,6 +57,24 @@ namespace LiftApp.ViewModels
             return ret.GetWorkoutObjects(workout);
         }
         private async Task SaveWorkout()
+        {
+
+            await _SaveRecord();
+            await _pageService.PopAsync();
+        }
+
+        private async Task AddExercise()
+        {
+            var viewModel = new ModelExercisesViewModel(_workoutStore, _pageService);
+            viewModel.ExerciseAdded += (source, exercise) =>
+             {
+                 Exercises.Add(exercise);
+             };
+
+            await _pageService.PushAsync(new CreateWorkoutAllExercises(viewModel));
+
+        }
+        private async Task _SaveRecord()
         {
             var workoutToAdd = new Workout();
             workoutToAdd.Id = Id;
@@ -75,14 +89,7 @@ namespace LiftApp.ViewModels
             {
                 await _workoutStore.UpdateWorkout(workoutToAdd);
             }
-
-            await _pageService.PopAsync();            
+            _workout = workoutToAdd;
         }
-
-        private async Task AddExercise()
-        {
-            await _pageService.PushAsync(new ExercisesOverwievPage());
-        }
-
     }
 }
